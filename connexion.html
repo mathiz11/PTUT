@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="utf-8"/>
+		<meta name="descripton" content="Prototype sondage"/>
+		<link rel="stylesheet" href="app.css"/>
+	    <title>Askthem</title>
+	</head>
+	
+	<body>
+		<div id="header">
+			<img src="logo_aix.png" alt="Logo Aix-Marseille" />
+			<h1> Ask Them : Application de sondage </h1>
+		</div>
+		<div id="page">
+			<h2> Page de connexion </h2>
+		
+			<form method="POST" action="/connecter/">
+			<label>Mail</label> : <input type="email" name="courriel" id="courriel" required/> <br/>
+			<label>Mot de passe</label> : <input type="password" name="mdp" id="mdp" required/> </br>
+			<input type="submit" value="Se connecter" name="connecter"/> <br/>
+			<label>Se souvenir de moi ?</label> <input type="checkbox" id="cookie" name="souvenir"/>
+			</form>
+			</br>
+			<a href="/mdp/">Mot de passe oublié ?</a>
+			</br>
+			<footer> Projet Ask Them - Groupe 5 - 2018-2019</footer>
+		</div>
+	</body>
+	
+</html>
