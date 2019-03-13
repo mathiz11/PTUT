@@ -5,10 +5,28 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="utf-8"/>
+    <meta name="descripton" content="Prototype sondage"/>
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
     <a href="/questionnaire">connexion</a>
+
+    <div id="page">
+      <h2> Page de connexion : Application de sondage </h2>
+
+      <form method="POST" action="/connecter/">
+      <label>Mail</label> : <input type="email" name="courriel" id="courriel" required/> <br/>
+      <label>Mot de passe</label> : <input type="password" name="mdp" id="mdp" required/> </br>
+      <input type="submit" value="Se connecter" name="connecter"/> <br/>
+      <label>Se souvenir de moi ?</label> <input type="checkbox" id="cookie" name="souvenir"/>
+      </form>
+      </br>
+      <a href="">Mot de passe oublié ?</a>
+      </br>
+      <footer> Projet Ask Them - Groupe 5 - 2018-2019</footer>
+    </div>
+
   </body>
 </html>
