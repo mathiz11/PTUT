@@ -1,17 +1,17 @@
 const dbConnection = require("./connexion");
-const queries = require("../queries/user_queries");
+const queries = require("../queries/quest_queries");
 
-module.exports = class UserDao {
+module.exports = class Quest_Dao {
   async saveEntity(entity) {
     let con = await dbConnection();
     try {
       await con.query("START TRANSACTION");
-      let savedUser = await con.query(
-        queries.insert_user,
-        [entity.id_membre, entity.nom, entity.mail, entity.mdp]
+      let savedQuest = await con.query(
+        queries.insert_quest,
+      [entity.id_questionnaire, entity.id_membre, entity.intitule_quest, entity.date_crea, entity.date_modif, entity.tps_attente]
       );
       await con.query("COMMIT");
-      entity.id_membre = savedUser.insertId;
+      entity.id_questionnaire = savedQuest.insertId;
       return entity;
     } catch (ex) {
       await con.query("ROLLBACK");
@@ -27,10 +27,11 @@ module.exports = class UserDao {
     let con = await dbConnection();
     try {
       await con.query("START TRANSACTION");
-      await con.query(queries.update_user, [
-        entity.mail,
-        entity.mdp,
-        entity.id
+      await con.query(queries.update_quest, [
+        entity.intitule_quest,
+        entity.date_modif,
+        entity.tps_attente,
+        entity.id_questionnaire
       ]);
       await con.query("COMMIT");
       return true;
@@ -48,7 +49,7 @@ module.exports = class UserDao {
     let con = await dbConnection();
     try {
       await con.query("START TRANSACTION");
-      await con.query(queries.delete_user, [id]);
+      await con.query(queries.delete_quest, [id]);
       await con.query("COMMIT");
       return true;
     } catch (ex) {
@@ -65,10 +66,10 @@ module.exports = class UserDao {
     let con = await dbConnection();
     try {
       await con.query("START TRANSACTION");
-      let user = await con.query(queries.read_user);
+      let quest = await con.query(queries.read_quest);
       await con.query("COMMIT");
-      user = JSON.parse(JSON.stringify(user));
-      return user;
+      quest = JSON.parse(JSON.stringify(quest));
+      return quest;
     } catch (ex) {
       console.log(ex);
       throw ex;
@@ -78,29 +79,13 @@ module.exports = class UserDao {
     }
   };
 
-  async read_where(mail, mdp) {
+  async read_where(id_membre) {
     let con = await dbConnection();
     try {
       await con.query("START TRANSACTION");
-      let user = await con.query(queries.read_user_where, [mail, mdp]);
+      let quest = await con.query(queries.read_quest_where, [id_membre]);
       await con.query("COMMIT");
-      return user;
-    } catch (ex) {
-      console.log(ex);
-      throw ex;
-    } finally {
-      await con.release();
-      await con.destroy();
-    }
-  };
-
-  async read_user_pwd(mail) {
-    let con = await dbConnection();
-    try {
-      await con.query("START TRANSACTION");
-      let user = await con.query(queries.read_user_pwd, [mail]);
-      await con.query("COMMIT");
-      return user;
+      return quest;
     } catch (ex) {
       console.log(ex);
       throw ex;
