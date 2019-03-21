@@ -1,10 +1,17 @@
 <head>
 <body>
-<script type="text/javascript">
-function OpenPage(){
-window.open('C:/Users/PC/Desktop/IUT/Projet_Tutoré/New/src/load.html');
+<script Language="Javascript">
+
+function LienAuHasard(){
+	Url = new Array;
+	base = "http://AskThem.com/";
+	ChoixLien = Math.floor(Math.random() * 100000);
+	document.write("Le lien du questionnaire est " + base + ChoixLien);
+	Url = base + ChoixLien;
+	window.open(Url,'_blank');
 }
+
 </script>
-<input type="button" name="submit" value="Lancer la session" onclick="OpenPage()"/>
+<input type="button" name="submit" value="Lancer la session" onclick="LienAuHasard()"/>
 </head>
 </body>
