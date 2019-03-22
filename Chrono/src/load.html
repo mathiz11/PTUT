@@ -2,6 +2,7 @@
 <body>
 <script type="text/javascript">
 window.onload = function launchAll(){
+setTimeout(function(){document.write("Hello");}, 300000);
 var time_in_minutes = 5;
 var current_time = Date.parse(new Date());
 var deadline = new Date(current_time + time_in_minutes*60*1000);
@@ -27,6 +28,7 @@ function run_clock(id,endtime){
 }
 run_clock('clockdiv',deadline);
 }
+
 </script>
 La session va commencer dans
 <br><br>
