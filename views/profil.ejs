@@ -34,7 +34,45 @@
   		</div>
   	</nav>
 
-    <h1><%= title %></h1>
-    <p>Welcome to <%= rubrique %></p>
+  <h3 class="titres" style="text-align: center; margin-top: 1em;">CHANGER SON E-MAIL</h3>
+  <div><%= info %> </div>
+  <form method="POST" action="/profil/infochange">
+<!--    <div class="form">
+      <label style="margin-left: 25.2%; margin-top: 1em;">E-Mail</label>
+      <input id="email" type="text" style="width: 50%; margin: 10px; margin-left: 25%; text-align: center;" class="form-control" name="e-mail" placeholder="Adresse E-Mail">
+    </div>
+      <button type="submit" class="btn btn-secondary btn-lg btn-block" style="width: 25%; margin: 10px; margin-left: 37.5%; margin-top: 1em;" >Changer son e-mail</button>
+
+  <h3 class="titres" style="text-align: center; margin-top: 1em;">CHANGER DE MOT DE PASSE</h3>
+
+      <div class="form">
+        <div>
+          <label style="margin-left: 25.2%; margin-top: 1em;">Ancien mot de passe</label>
+            <input id="amdp" type="password" style="width: 50%; margin: 10px; margin-left: 25%; text-align: center;" class="form-control" id="inputPassword" placeholder="Ancien mot de passe">
+        </div>
+      </div>
+
+      <div class="form">
+        <div>
+          <label style="margin-left: 25.2%; margin-top: 1em;">Nouveau mot de passe</label>
+            <input id="nmdp" type="password" style="width: 50%; margin: 10px; margin-left: 25%; text-align: center;" class="form-control" id="inputPassword" placeholder="Nouveau mot de passe">
+        </div>
+      </div>
+
+      <div class="form">
+        <div>
+          <label style="margin-left: 25.2%; margin-top: 1em;">Confirmer le nouveau mot de passe</label>
+            <input id="nmdp2" type="password" style="width: 50%; margin: 10px; margin-left: 25%; text-align: center;" class="form-control" id="inputPassword" placeholder="Confirmation">
+        </div>
+      </div>
+      <button type="button" class="btn btn-secondary btn-lg btn-block" style="width: 25%; margin: 10px; margin-left: 37.5%; margin-top: 1em;" >Changer son mot de passe</button>
+-->
+    <label style="margin-left: 25.2%; margin-top: 1em;">E-Mail</label> <br>
+    <input style="width: 50%; margin: 10px; margin-left: 25%; text-align: center;" type="email" name="mail" id="email" /> <br/>
+    <input style="width: 50%; margin: 10px; margin-left: 25%; text-align: center;" type="submit" value="Changer son e-mail" name="email"/> <br/>
+    <label style="margin-left: 25.2%; margin-top: 1em;">Mot de passe</label> <br>
+    <input style="width: 50%; margin: 10px; margin-left: 25%; text-align: center;" type="password" name="mdp" id="mdp" /> </br>
+    <input style="width: 50%; margin: 10px; margin-left: 25%; text-align: center;" type="submit" value="Changer son mot de passe" name="mdp"/> <br/>
+  </form>
   </body>
 </html>

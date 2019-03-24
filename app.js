@@ -50,9 +50,9 @@ passport.use('local', new LocalStrategy({
 
         if(!rows.length){
 			console.log("Longueur différente");
-			return done(null, false); 
+			return done(null, false);
 		}
-		
+
 		var dbMail = rows[0].mail;
 		var dbPassword  = rows[0].mdp;
 		if (!(dbMail == courriel) | !(dbPassword == mdp)){
