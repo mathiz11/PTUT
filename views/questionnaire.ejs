@@ -34,16 +34,20 @@
 				</ul>
 			</div>
 		</nav>
+
+		<% if(error) { %>
+			<%= error %>
+		<% } %> 
 	
 		<div id="questionnaires">
 			<% if(questionnaires.length === 0) { %>
 				<p>Auncun questionnaire</p>
 			<% } else { %>
 				<% questionnaires.forEach( function(element) { %>
-					<div class="questionnaire">
+					<div class="list-group-item list-group-item-action">
 						<%= element.intitule_quest %>
-						<a href="/delete/"<%= element.id_questionnaire %> ><i class="fas fa-trash"></i></a>
-						<a href="/"><i class="fas fa-pen-square"></i></a>
+						<a style="float: right" class="btn btn-outline-default btn-sm" href="questionnaire/delete/<%= element.id_questionnaire %>"><i class="fas fa-trash"></i></a>
+						<a style="float: right" class="btn btn-outline-default btn-sm" href=""><i class="fas fa-pen-square"></i></a>
 					</div>
 				<% }); %>
 			<% } %>
