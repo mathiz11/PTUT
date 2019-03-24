@@ -1,29 +1,23 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1
--- http://www.phpmyadmin.net
+-- version 4.8.3
+-- https://www.phpmyadmin.net/
 --
--- Client :  localhost
--- Généré le :  Mar 19 Mars 2019 à 20:14
--- Version du serveur :  5.7.11
--- Version de PHP :  5.6.18
+-- Host: localhost:3306
+-- Generation Time: Mar 24, 2019 at 08:59 PM
+-- Server version: 5.7.23
+-- PHP Version: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
--- Base de données :  `askthem`
+-- Database: `askthem`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `choix_reponses`
+-- Table structure for table `choix_reponses`
 --
 
 CREATE TABLE `choix_reponses` (
@@ -39,7 +33,7 @@ CREATE TABLE `choix_reponses` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `filtres`
+-- Table structure for table `filtres`
 --
 
 CREATE TABLE `filtres` (
@@ -51,7 +45,7 @@ CREATE TABLE `filtres` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `membres`
+-- Table structure for table `membres`
 --
 
 CREATE TABLE `membres` (
@@ -62,16 +56,18 @@ CREATE TABLE `membres` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `membres`
+-- Dumping data for table `membres`
 --
 
 INSERT INTO `membres` (`id_membre`, `nom`, `mail`, `mdp`) VALUES
-(1, 'oui', 'oui@ah.o', 'oui');
+(1, 'michel', 'michel@hotmail.fr', 'michel'),
+(2, 'mathis', 'mathis@hotmail.fr', 'mathis'),
+(3, 'brett', 'brett@hotmail.fr', 'brett');
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `participants`
+-- Table structure for table `participants`
 --
 
 CREATE TABLE `participants` (
@@ -82,7 +78,7 @@ CREATE TABLE `participants` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `participer`
+-- Table structure for table `participer`
 --
 
 CREATE TABLE `participer` (
@@ -97,7 +93,7 @@ CREATE TABLE `participer` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `qcm`
+-- Table structure for table `qcm`
 --
 
 CREATE TABLE `qcm` (
@@ -108,7 +104,7 @@ CREATE TABLE `qcm` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `qco`
+-- Table structure for table `qco`
 --
 
 CREATE TABLE `qco` (
@@ -119,7 +115,7 @@ CREATE TABLE `qco` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `qcu`
+-- Table structure for table `qcu`
 --
 
 CREATE TABLE `qcu` (
@@ -130,7 +126,7 @@ CREATE TABLE `qcu` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `questionnaires`
+-- Table structure for table `questionnaires`
 --
 
 CREATE TABLE `questionnaires` (
@@ -142,10 +138,18 @@ CREATE TABLE `questionnaires` (
   `tps_attente` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `questionnaires`
+--
+
+INSERT INTO `questionnaires` (`id_questionnaire`, `id_membre`, `intitule_quest`, `date_crea`, `date_modif`, `tps_attente`) VALUES
+(2, 1, 'React', '2019-12-20', '2019-12-20', '00:00:00'),
+(3, 2, 'Ionic', '2019-12-30', '2019-12-31', '00:00:00');
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `questions`
+-- Table structure for table `questions`
 --
 
 CREATE TABLE `questions` (
@@ -160,7 +164,7 @@ CREATE TABLE `questions` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `reponsesouvertes`
+-- Table structure for table `reponsesouvertes`
 --
 
 CREATE TABLE `reponsesouvertes` (
@@ -173,7 +177,7 @@ CREATE TABLE `reponsesouvertes` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `reponsesqcm`
+-- Table structure for table `reponsesqcm`
 --
 
 CREATE TABLE `reponsesqcm` (
@@ -187,7 +191,7 @@ CREATE TABLE `reponsesqcm` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `reponsesqcu`
+-- Table structure for table `reponsesqcu`
 --
 
 CREATE TABLE `reponsesqcu` (
@@ -201,7 +205,7 @@ CREATE TABLE `reponsesqcu` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `resultats`
+-- Table structure for table `resultats`
 --
 
 CREATE TABLE `resultats` (
@@ -212,11 +216,11 @@ CREATE TABLE `resultats` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Index pour les tables exportées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `choix_reponses`
+-- Indexes for table `choix_reponses`
 --
 ALTER TABLE `choix_reponses`
   ADD PRIMARY KEY (`id_chreponse`),
@@ -226,26 +230,26 @@ ALTER TABLE `choix_reponses`
   ADD KEY `fk_choix_reponses_reponsesQCU1_idx` (`id_reponseQCU`);
 
 --
--- Index pour la table `filtres`
+-- Indexes for table `filtres`
 --
 ALTER TABLE `filtres`
   ADD PRIMARY KEY (`id_filtre`);
 
 --
--- Index pour la table `membres`
+-- Indexes for table `membres`
 --
 ALTER TABLE `membres`
   ADD PRIMARY KEY (`id_membre`);
 
 --
--- Index pour la table `participants`
+-- Indexes for table `participants`
 --
 ALTER TABLE `participants`
   ADD PRIMARY KEY (`id_participant`),
   ADD UNIQUE KEY `adresseIP_UNIQUE` (`adresseIP`);
 
 --
--- Index pour la table `participer`
+-- Indexes for table `participer`
 --
 ALTER TABLE `participer`
   ADD PRIMARY KEY (`id_participer`),
@@ -253,35 +257,35 @@ ALTER TABLE `participer`
   ADD KEY `fk_pseudos_sessions1_idx` (`id_resultat`);
 
 --
--- Index pour la table `qcm`
+-- Indexes for table `qcm`
 --
 ALTER TABLE `qcm`
   ADD PRIMARY KEY (`id_QCM`),
   ADD KEY `fk_QCM_questions1_idx` (`id_question`);
 
 --
--- Index pour la table `qco`
+-- Indexes for table `qco`
 --
 ALTER TABLE `qco`
   ADD PRIMARY KEY (`id_QCO`),
   ADD KEY `fk_QCO_questions1_idx` (`id_question`);
 
 --
--- Index pour la table `qcu`
+-- Indexes for table `qcu`
 --
 ALTER TABLE `qcu`
   ADD PRIMARY KEY (`id_QCU`),
   ADD KEY `fk_QCU_questions1_idx` (`id_question`);
 
 --
--- Index pour la table `questionnaires`
+-- Indexes for table `questionnaires`
 --
 ALTER TABLE `questionnaires`
   ADD PRIMARY KEY (`id_questionnaire`),
   ADD KEY `fk_questionnaires_utilisateurs_idx` (`id_membre`);
 
 --
--- Index pour la table `questions`
+-- Indexes for table `questions`
 --
 ALTER TABLE `questions`
   ADD PRIMARY KEY (`id_question`),
@@ -289,7 +293,7 @@ ALTER TABLE `questions`
   ADD KEY `fk_questions_filtres1_idx` (`id_filtre`);
 
 --
--- Index pour la table `reponsesouvertes`
+-- Indexes for table `reponsesouvertes`
 --
 ALTER TABLE `reponsesouvertes`
   ADD PRIMARY KEY (`id_reponseOuv`),
@@ -297,7 +301,7 @@ ALTER TABLE `reponsesouvertes`
   ADD KEY `fk_reponsesOuvertes_QCO1_idx` (`id_QCO`);
 
 --
--- Index pour la table `reponsesqcm`
+-- Indexes for table `reponsesqcm`
 --
 ALTER TABLE `reponsesqcm`
   ADD PRIMARY KEY (`id_reponseQCM`),
@@ -305,7 +309,7 @@ ALTER TABLE `reponsesqcm`
   ADD KEY `fk_reponsesQCM_QCM1_idx` (`id_QCM`);
 
 --
--- Index pour la table `reponsesqcu`
+-- Indexes for table `reponsesqcu`
 --
 ALTER TABLE `reponsesqcu`
   ADD PRIMARY KEY (`id_reponseQCU`),
@@ -313,92 +317,106 @@ ALTER TABLE `reponsesqcu`
   ADD KEY `fk_reponsesQCU_QCU1_idx` (`id_QCU`);
 
 --
--- Index pour la table `resultats`
+-- Indexes for table `resultats`
 --
 ALTER TABLE `resultats`
   ADD PRIMARY KEY (`id_resultat`),
   ADD KEY `fk_sessions_²1_idx` (`id_questionnaire`);
 
 --
--- AUTO_INCREMENT pour les tables exportées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `choix_reponses`
+-- AUTO_INCREMENT for table `choix_reponses`
 --
 ALTER TABLE `choix_reponses`
   MODIFY `id_chreponse` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT pour la table `filtres`
+-- AUTO_INCREMENT for table `filtres`
 --
 ALTER TABLE `filtres`
   MODIFY `id_filtre` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT pour la table `membres`
+-- AUTO_INCREMENT for table `membres`
 --
 ALTER TABLE `membres`
-  MODIFY `id_membre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_membre` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
--- AUTO_INCREMENT pour la table `participants`
+-- AUTO_INCREMENT for table `participants`
 --
 ALTER TABLE `participants`
   MODIFY `id_participant` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT pour la table `participer`
+-- AUTO_INCREMENT for table `participer`
 --
 ALTER TABLE `participer`
   MODIFY `id_participer` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT pour la table `qcm`
+-- AUTO_INCREMENT for table `qcm`
 --
 ALTER TABLE `qcm`
   MODIFY `id_QCM` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT pour la table `qco`
+-- AUTO_INCREMENT for table `qco`
 --
 ALTER TABLE `qco`
   MODIFY `id_QCO` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT pour la table `qcu`
+-- AUTO_INCREMENT for table `qcu`
 --
 ALTER TABLE `qcu`
   MODIFY `id_QCU` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT pour la table `questionnaires`
+-- AUTO_INCREMENT for table `questionnaires`
 --
 ALTER TABLE `questionnaires`
-  MODIFY `id_questionnaire` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_questionnaire` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
--- AUTO_INCREMENT pour la table `questions`
+-- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
   MODIFY `id_question` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT pour la table `reponsesouvertes`
+-- AUTO_INCREMENT for table `reponsesouvertes`
 --
 ALTER TABLE `reponsesouvertes`
   MODIFY `id_reponseOuv` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT pour la table `reponsesqcm`
+-- AUTO_INCREMENT for table `reponsesqcm`
 --
 ALTER TABLE `reponsesqcm`
   MODIFY `id_reponseQCM` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT pour la table `reponsesqcu`
+-- AUTO_INCREMENT for table `reponsesqcu`
 --
 ALTER TABLE `reponsesqcu`
   MODIFY `id_reponseQCU` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- AUTO_INCREMENT pour la table `resultats`
+-- AUTO_INCREMENT for table `resultats`
 --
 ALTER TABLE `resultats`
   MODIFY `id_resultat` int(11) NOT NULL AUTO_INCREMENT;
+
 --
--- Contraintes pour les tables exportées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `choix_reponses`
+-- Constraints for table `choix_reponses`
 --
 ALTER TABLE `choix_reponses`
   ADD CONSTRAINT `fk_choix_reponses_etudiants1` FOREIGN KEY (`id_participant`) REFERENCES `participants` (`id_participant`) ON DELETE NO ACTION ON UPDATE NO ACTION,
@@ -407,70 +425,66 @@ ALTER TABLE `choix_reponses`
   ADD CONSTRAINT `fk_choix_reponses_reponsesQCU1` FOREIGN KEY (`id_reponseQCU`) REFERENCES `reponsesqcu` (`id_reponseQCU`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Contraintes pour la table `participer`
+-- Constraints for table `participer`
 --
 ALTER TABLE `participer`
   ADD CONSTRAINT `fk_pseudos_etudiants1` FOREIGN KEY (`id_participant`) REFERENCES `participants` (`id_participant`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_pseudos_sessions1` FOREIGN KEY (`id_resultat`) REFERENCES `resultats` (`id_resultat`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Contraintes pour la table `qcm`
+-- Constraints for table `qcm`
 --
 ALTER TABLE `qcm`
   ADD CONSTRAINT `fk_QCM_questions1` FOREIGN KEY (`id_question`) REFERENCES `questions` (`id_question`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Contraintes pour la table `qco`
+-- Constraints for table `qco`
 --
 ALTER TABLE `qco`
   ADD CONSTRAINT `fk_QCO_questions1` FOREIGN KEY (`id_question`) REFERENCES `questions` (`id_question`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Contraintes pour la table `qcu`
+-- Constraints for table `qcu`
 --
 ALTER TABLE `qcu`
   ADD CONSTRAINT `fk_QCU_questions1` FOREIGN KEY (`id_question`) REFERENCES `questions` (`id_question`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Contraintes pour la table `questionnaires`
+-- Constraints for table `questionnaires`
 --
 ALTER TABLE `questionnaires`
   ADD CONSTRAINT `fk_questionnaires_utilisateurs` FOREIGN KEY (`id_membre`) REFERENCES `membres` (`id_membre`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Contraintes pour la table `questions`
+-- Constraints for table `questions`
 --
 ALTER TABLE `questions`
   ADD CONSTRAINT `fk_questions_filtres1` FOREIGN KEY (`id_filtre`) REFERENCES `filtres` (`id_filtre`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_questions_questionnaires1` FOREIGN KEY (`id_questionnaire`) REFERENCES `questionnaires` (`id_questionnaire`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Contraintes pour la table `reponsesouvertes`
+-- Constraints for table `reponsesouvertes`
 --
 ALTER TABLE `reponsesouvertes`
   ADD CONSTRAINT `fk_reponsesOuvertes_QCO1` FOREIGN KEY (`id_QCO`) REFERENCES `qco` (`id_QCO`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_reponses_filtres1` FOREIGN KEY (`id_filtre`) REFERENCES `filtres` (`id_filtre`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Contraintes pour la table `reponsesqcm`
+-- Constraints for table `reponsesqcm`
 --
 ALTER TABLE `reponsesqcm`
   ADD CONSTRAINT `fk_reponsesQCM_QCM1` FOREIGN KEY (`id_QCM`) REFERENCES `qcm` (`id_QCM`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_reponses_filtres10` FOREIGN KEY (`id_filtre`) REFERENCES `filtres` (`id_filtre`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Contraintes pour la table `reponsesqcu`
+-- Constraints for table `reponsesqcu`
 --
 ALTER TABLE `reponsesqcu`
   ADD CONSTRAINT `fk_reponsesQCU_QCU1` FOREIGN KEY (`id_QCU`) REFERENCES `qcu` (`id_QCU`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_reponses_filtres100` FOREIGN KEY (`id_filtre`) REFERENCES `filtres` (`id_filtre`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Contraintes pour la table `resultats`
+-- Constraints for table `resultats`
 --
 ALTER TABLE `resultats`
   ADD CONSTRAINT `fk_sessions_²1` FOREIGN KEY (`id_questionnaire`) REFERENCES `questionnaires` (`id_questionnaire`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
