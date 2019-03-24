@@ -109,4 +109,20 @@ module.exports = class UserDao {
       await con.destroy();
     }
   };
+
+  async read_user(id) {
+    let con = await dbConnection();
+    try {
+      await con.query("START TRANSACTION");
+      let user = await con.query(queries.read_user_byid, [id]);
+      await con.query("COMMIT");
+      return user;
+    } catch (ex) {
+      console.log(ex);
+      throw ex;
+    } finally {
+      await con.release();
+      await con.destroy();
+    }
+  };
 };
