@@ -91,7 +91,7 @@ router.get('/:idQnair/question/delete/:idQtion', isAuthenticated, function(req, 
 
 router.get('/:idQnair/question/:idQtion', isAuthenticated, function(req, res, next) {
   const request = async () => {
-    let results = await questDao.select_questions(req.param("idQnair"));
+    let results = await questDao.select_questionsmodif(req.param("idQtion"));
     res.render('maQuestion', { title: 'AskThem', id_questionnaire: req.param("idQnair"),id_question: req.param("idQtion") ,questions: results, error: null});
   }
   request();
