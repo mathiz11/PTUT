@@ -18,16 +18,7 @@ router.post('/', urlencodedParser, function(req, res) {
 			let results = await UserDao.read_user_pwd(req.body.courriel);
 			if (results != '')
 			{
-				mail.message({
-					from: 'purple.laidies@gmail.com',
-					to: 'estelle.angosto@gmail.com',
-					subject: 'Mot de passe oublié'
-				})
-				.body('Votre mot de passe est '+results.mdp+' .')
-				.send(function(err){
-					if (err) throw err;
-					console.log('Sent');
-				});
+				res.send('Mot de passe trouvé : '+results[0].mdp);
 			}else res.render('mdp_oublie', { title: 'AskThem', error:'Mail introuvable'});
 	}
 	app();
