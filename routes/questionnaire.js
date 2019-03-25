@@ -70,5 +70,41 @@ router.post('/:idQnair/save', isAuthenticated, function(req, res, next) {
   res.redirect('/questionnaire');
 });
 
+router.get('/:idQnair/question/insert', isAuthenticated, function(req, res, next) {
+  const request = async () => {
+    let results = await questDao.saveQuestion(req.param("idQnair"),'Undef', 'Undef', 0);
+    res.render('maQuestion', { title: 'AskThem', id_questionnaire: req.param("idQnair"),id_question: req.param("idQtion") ,questions: results, error: null});
+  }
+  request();
+});
+
+router.get('/:idQnair/question/delete/:idQtion', isAuthenticated, function(req, res, next) {
+  const request = async () => {
+    let results = await questDao.deleteQtion(req.param("idQtion"));
+    if(!results) {
+      const error = "<div id=\"error\">Erreur lors de la suppression de questionnaire</div>";
+      res.render('questionnaire', { title: 'AskThem', questionnaires: results, error: error});
+    }
+  }
+  request();
+});
+
+router.get('/:idQnair/question/:idQtion', isAuthenticated, function(req, res, next) {
+  const request = async () => {
+    let results = await questDao.select_questions(req.param("idQnair"));
+    res.render('maQuestion', { title: 'AskThem', id_questionnaire: req.param("idQnair"),id_question: req.param("idQtion") ,questions: results, error: null});
+  }
+  request();
+});
+
+router.post('/:idQnair/question/:idQtion/save', isAuthenticated, function(req, res, next) {
+  const request = async () => {
+    let results = await questDao.updateQtion(req.body.intituleQtion, req.body.QC, req.body.tempsQ, req.param("idQtion"));
+    res.render('maQuestion', { title: 'AskThem', id_questionnaire: req.param("idQnair"),id_question: req.param("idQtion") ,questions: results, error: null});
+  }
+  request();
+  res.redirect("/questionnaire")
+});
+
 
 module.exports = router;
