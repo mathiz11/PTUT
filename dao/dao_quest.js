@@ -124,4 +124,63 @@ async select_questions(id_questionnaire) {
     await con.destroy();
   }
 };
+
+async saveQuestion(idq, intitule, type, temps) {
+  let con = await dbConnection();
+  try {
+    await con.query("START TRANSACTION");
+    let savedQuest = await con.query(
+      queries.insert_question,
+    [ idq, intitule, type, temps]
+    );
+    await con.query("COMMIT");
+    return entity;
+  } catch (ex) {
+    await con.query("ROLLBACK");
+    console.log(ex);
+    throw ex;
+  } finally {
+    await con.release();
+    await con.destroy();
+  }
+};
+
+async deleteQtion(id) {
+  let con = await dbConnection();
+  try {
+    await con.query("START TRANSACTION");
+    await con.query(queries.delete_question, [id]);
+    await con.query("COMMIT");
+    return true;
+  } catch (ex) {
+    await con.query("ROLLBACK");
+    console.log(ex);
+    throw ex;
+  } finally {
+    await con.release();
+    await con.destroy();
+  }
+};
+
+async updateQtion(intitule, type, temps, idq) {
+  let con = await dbConnection();
+  try {
+    await con.query("START TRANSACTION");
+    await con.query(queries.update_question, [
+      intitule,
+      type,
+      temps,
+      idq
+    ]);
+    await con.query("COMMIT");
+    return true;
+  } catch (ex) {
+    await con.query("ROLLBACK");
+    console.log(ex);
+    throw ex;
+  } finally {
+    await con.release();
+    await con.destroy();
+  }
+};
 };
