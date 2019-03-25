@@ -22,15 +22,14 @@ module.exports = class Quest_Dao {
     }
   }
 
-  async updateEntity(entity) {
+  async updateEntity(intitule, date_modif,idq) {
     let con = await dbConnection();
     try {
       await con.query("START TRANSACTION");
       await con.query(queries.update_quest, [
-        entity.intitule_quest,
-        entity.date_modif,
-        entity.tps_attente,
-        entity.id_questionnaire
+        intitule,
+        date_modif,
+        idq
       ]);
       await con.query("COMMIT");
       return true;
@@ -94,11 +93,11 @@ module.exports = class Quest_Dao {
     }
   };
 
-async read_quest_where(id_questionnaire) {
+async read_questionnaire(id_questionnaire) {
   let con = await dbConnection();
   try {
     await con.query("START TRANSACTION");
-    let quest = await con.query(queries.read_maquest, [id_questionnaire]);
+    let quest = await con.query(queries.read_monquest, [id_questionnaire]);
     await con.query("COMMIT");
     return quest;
   } catch (ex) {
