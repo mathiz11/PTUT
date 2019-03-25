@@ -17,7 +17,7 @@
   		<div class="collapse navbar-collapse" id="mynav">
   			<ul class="navbar-nav mr-auto">
   	  			<li class="nav-item">
-  	   				 <a class="nav-link" href="">Questionnaire</a>
+  	   				 <a class="nav-link" href="../questionnaire">Questionnaire</a>
   	  			</li>
   	 			<li class="nav-item">
   	    			<a class="nav-link" href="../session">Session</a>
@@ -35,22 +35,24 @@
   	</nav>
 
     <h1>AskThem</h1>
-    <p>Questionnaire <%= element.id_questionnaire %> </p>
+    <p>Questionnaire <%= id_questionnaire %> </p>
 
-    <a class="btn btn-outline-default btn-sm" type="button" name="button">Ajouter</a>
+    <% questionnaires.forEach( function(element) { %>
+    <a class="btn btn-outline-default btn-sm" type="button" name="button" href="/questionnaire/<%= element.id_questionnaire%>/question">Ajouter Question</a>
 
 
-    <form action="/questionnaire/<%= element.id_questionnaire %>" method="post">
-      <button class="button" type="submit" name="button">Sauvegarder</button>
+    <form action="/questionnaire/<%= element.id_questionnaire %>/save" method="post">
 
         <div class="list-group-item list-group-item-action">
 
-                  <input class="intitule" type="text" value="<%= element.intitule_quest %>">
+            <input class="intitule" name="intituleQnair" value="<%= element.intitule_quest %>">
 
         </div>
 
+        <input class="btn btn-outline-default btn-sm" type="submit" value="Sauvegarder" name="button">
     </form>
-    <a class="btn btn-outline-default btn-sm" href="questionnaire"><i class="fas fa-angle-left"></i></a>
+    <% }); %>
+    <a class="btn btn-outline-default btn-sm" href="/questionnaire"><i class="fas fa-angle-left"></i></a>
 
 
   </body>
