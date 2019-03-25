@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var bodyParser = require('body-parser');
 const Quest_Dao = require('../dao/dao_quest.js');
 const questDao = new Quest_Dao();
 
@@ -46,8 +47,8 @@ router.get('/insert', isAuthenticated, function(req, res, next) {
 
 router.get('/:idQnair', isAuthenticated, function(req, res, next) {
   const request = async () => {
-    let results = await questDao.read_quest_where(req.param("idQnair"));
-    res.render('monQuestionnaire', { title: 'AskThem', element: results, error: null});
+    let results = await questDao.read_questionnaire(req.param("idQnair"));
+    res.render('monQuestionnaire', { title: 'AskThem', questionnaires: results,id_questionnaire: req.param("idQnair"), error: null});
   }
   request();
 });
@@ -55,9 +56,18 @@ router.get('/:idQnair', isAuthenticated, function(req, res, next) {
 router.get('/:idQnair/question', isAuthenticated, function(req, res, next) {
   const request = async () => {
     let results = await questDao.select_questions(req.param("idQnair"));
-    res.render('mesQuestions', { title: 'AskThem', id_questionnaire: req.param.idQnair ,questions: results, error: null});
+    res.render('mesQuestions', { title: 'AskThem', id_questionnaire: req.param("idQnair") ,questions: results, error: null});
   }
   request();
+});
+
+router.post('/:idQnair/save', isAuthenticated, function(req, res, next) {
+  const request = async () => {
+    let results = await questDao.updateEntity(req.body.intituleQnair, new Date(),req.param("idQnair"));
+    res.render('mesQuestions', { title: 'AskThem', id_questionnaire: req.param("idQnair") ,questions: results, error: null});
+  }
+  request();
+  res.redirect('/questionnaire');
 });
 
 
