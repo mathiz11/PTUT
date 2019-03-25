@@ -125,6 +125,22 @@ async select_questions(id_questionnaire) {
   }
 };
 
+async select_questionsmodif(id_question) {
+  let con = await dbConnection();
+  try {
+    await con.query("START TRANSACTION");
+    let quest = await con.query(queries.read_questionmodif, [id_question]);
+    await con.query("COMMIT");
+    return quest;
+  } catch (ex) {
+    console.log(ex);
+    throw ex;
+  } finally {
+    await con.release();
+    await con.destroy();
+  }
+};
+
 async saveQuestion(idq, intitule, type, temps) {
   let con = await dbConnection();
   try {
