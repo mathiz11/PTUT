@@ -8,5 +8,6 @@ module.exports = {
     delete_quest: `DELETE FROM questionnaires WHERE questionnaires.id_questionnaire = ?`,
     delete_question: `DELETE FROM questions WHERE questions.id_question = ?`,
     read_question: `SELECT * FROM questions WHERE questions.id_questionnaire = ?`,
+    read_questionmodif: `SELECT * FROM questions WHERE questions.id_question = ?`,
     insert_question: `INSERT INTO questions(id_question, id_questionnaire, id_filtre, intitulé_question, type_question, duree_reponse) VALUES(default, ?, NULL, ?, ?, ?)`,
 }
