@@ -38,8 +38,8 @@
     <p>Section <%= rubrique %></p>
 	
 	<ul>
-		<% resultats.forEach(function(resultats) { %>
-			<li><%= resultats.date_passage %> - <%= resultats.heure_passage %> - <a  href="./resultat/<%=resultats.id_resultat%>">Voir résultats</a></li>
+		<% questions.forEach(function(question) { %>
+			<li><%= question.intitule_question %> - <%= question.type_question %> - <a  href="./resultats/<%=question.id_question%>">Voir réponses</a></li>
 		<% }); %>
 	</ul>
   </body>
