@@ -16,7 +16,8 @@ var mdpRouter = require('./routes/mdp_oublie');
 var questionnaireRouter = require('./routes/questionnaire');
 var sessionRouter = require('./routes/session');
 var profilRouter = require('./routes/profil');
-
+var powerpoint = require('./routes/powerpoint');
+var load = require('./routes/load');
 var app = express();
 
 // view engine setup
@@ -102,6 +103,8 @@ app.use('/mdp', mdpRouter);
 app.use('/questionnaire', questionnaireRouter);
 app.use('/session', sessionRouter);
 app.use('/profil', profilRouter);
+app.use('/powerpoint', powerpoint);
+app.use('/load', load);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
