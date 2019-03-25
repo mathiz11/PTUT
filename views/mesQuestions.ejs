@@ -17,7 +17,7 @@
   		<div class="collapse navbar-collapse" id="mynav">
   			<ul class="navbar-nav mr-auto">
   	  			<li class="nav-item">
-  	   				 <a class="nav-link" href="">Questionnaire</a>
+  	   				 <a class="nav-link" href="../questionnaire">Questionnaire</a>
   	  			</li>
   	 			<li class="nav-item">
   	    			<a class="nav-link" href="../session">Session</a>
@@ -38,7 +38,7 @@
 			<%= error %>
 		<% } %>
 
-    <a class="btn btn-outline-default btn-sm" type="button" name="button" href="questionnaire/id_questionnaire/question/insert"><i class="fas fa-plus"></i></a>
+    <a class="btn btn-outline-default btn-sm" type="button" name="button" href="/questionnaire/<%= id_questionnaire %>/question/insert"><i class="fas fa-plus"></i></a>
 
 		<div id="questionnaires">
 			<% if(questions.length === 0) { %>
@@ -46,9 +46,10 @@
 			<% } else { %>
 				<% questions.forEach( function(element) { %>
 					<div class="list-group-item list-group-item-action">
-						<%= element.intitulé_question %>
-						<a style="float: right" class="btn btn-outline-default btn-sm" href="questionnaire/id_questionnaire/delete/<%= element.id_question %>"><i class="fas fa-trash"></i></a>
-						<a style="float: right" class="btn btn-outline-default btn-sm" href="questionnaire/id_questionnaire/question/<%= element.id_question %>"><i class="fas fa-pen-square"></i></a>
+						<%= element.intitulé_question %><br>
+            (<%= element.type_question %>)
+						<a style="float: right" class="btn btn-outline-default btn-sm" href="/questionnaire/<%= id_questionnaire %>/question/delete/<%= element.id_question %>"><i class="fas fa-trash"></i></a>
+						<a style="float: right" class="btn btn-outline-default btn-sm" href="/questionnaire/<%= id_questionnaire%>/question/<%= element.id_question %>"><i class="fas fa-pen-square"></i></a>
 					</div>
 				<% }); %>
 			<% } %>
