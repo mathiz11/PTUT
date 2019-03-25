@@ -2,16 +2,15 @@ const dbConnection = require("./connexion");
 const queries = require("../queries/quest_queries");
 
 module.exports = class Quest_Dao {
-  async saveEntity(entity) {
+  async saveEntity(idm, intitule, date_crea, date_modif, temps) {
     let con = await dbConnection();
     try {
       await con.query("START TRANSACTION");
       let savedQuest = await con.query(
         queries.insert_quest,
-      [entity.id_questionnaire, entity.id_membre, entity.intitule_quest, entity.date_crea, entity.date_modif, entity.tps_attente]
+      [ idm, intitule, date_crea, date_modif, temps]
       );
       await con.query("COMMIT");
-      entity.id_questionnaire = savedQuest.insertId;
       return entity;
     } catch (ex) {
       await con.query("ROLLBACK");
@@ -94,4 +93,36 @@ module.exports = class Quest_Dao {
       await con.destroy();
     }
   };
+
+async read_quest_where(id_questionnaire) {
+  let con = await dbConnection();
+  try {
+    await con.query("START TRANSACTION");
+    let quest = await con.query(queries.read_maquest, [id_questionnaire]);
+    await con.query("COMMIT");
+    return quest;
+  } catch (ex) {
+    console.log(ex);
+    throw ex;
+  } finally {
+    await con.release();
+    await con.destroy();
+  }
+};
+
+async select_questions(id_questionnaire) {
+  let con = await dbConnection();
+  try {
+    await con.query("START TRANSACTION");
+    let quest = await con.query(queries.read_question, [id_questionnaire]);
+    await con.query("COMMIT");
+    return quest;
+  } catch (ex) {
+    console.log(ex);
+    throw ex;
+  } finally {
+    await con.release();
+    await con.destroy();
+  }
+};
 };
