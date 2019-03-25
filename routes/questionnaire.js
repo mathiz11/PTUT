@@ -20,9 +20,9 @@ router.get('/', isAuthenticated, function(req, res, next) {
   request();
 });
 
-router.get('/delete/:idQnair', isAuthenticated, function(req, res, next) {
+router.get('/delete/:id', isAuthenticated, function(req, res, next) {
   const request = async () => {
-    let results = await questDao.deleteEntity(req.param.idQnair);
+    let results = await questDao.deleteEntity(req.param("id"));
     if(!results) {
       const error = "<div id=\"error\">Erreur lors de la suppression de questionnaire</div>";
       res.render('questionnaire', { title: 'AskThem', questionnaires: results, error: error});
@@ -46,7 +46,7 @@ router.get('/insert', isAuthenticated, function(req, res, next) {
 
 router.get('/:idQnair', isAuthenticated, function(req, res, next) {
   const request = async () => {
-    let results = await questDao.read_quest_where(req.param.id);
+    let results = await questDao.read_quest_where(req.param("idQnair"));
     res.render('monQuestionnaire', { title: 'AskThem', element: results, error: null});
   }
   request();
@@ -54,12 +54,11 @@ router.get('/:idQnair', isAuthenticated, function(req, res, next) {
 
 router.get('/:idQnair/question', isAuthenticated, function(req, res, next) {
   const request = async () => {
-    let results = await questDao.select_questions(req.param.idQnair);
+    let results = await questDao.select_questions(req.param("idQnair"));
     res.render('mesQuestions', { title: 'AskThem', id_questionnaire: req.param.idQnair ,questions: results, error: null});
   }
   request();
 });
-
 
 
 module.exports = router;
