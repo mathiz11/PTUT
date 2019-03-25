@@ -1,7 +1,7 @@
 const dbConnection = require("./connexion");
 const queries = require("../queries/chrep_queries");
 
-module.exports = class UserDao {
+module.exports = class ChrepDao {
   async saveEntity(entity) {
     let con = await dbConnection();
     try {
@@ -23,6 +23,37 @@ module.exports = class UserDao {
     }
   }
 
+  async read_where(id_part) {
+    let con = await dbConnection();
+    try {
+      await con.query("START TRANSACTION");
+      let qc = await con.query(queries.read_where, [id_part]);
+      await con.query("COMMIT");
+      return qc;
+    } catch (ex) {
+      console.log(ex);
+      throw ex;
+    } finally {
+      await con.release();
+      await con.destroy();
+    }
+  };
+
+  async read_intititule(id_part) {
+    let con = await dbConnection();
+    try {
+      await con.query("START TRANSACTION");
+      let qc = await con.query(queries.read_where_intit, [id_part]);
+      await con.query("COMMIT");
+      return qc;
+    } catch (ex) {
+      console.log(ex);
+      throw ex;
+    } finally {
+      await con.release();
+      await con.destroy();
+    }
+  };
 
   async deleteEntity(id) {
     let con = await dbConnection();
