@@ -45,18 +45,27 @@ router.post('/infochange', isAuthenticated, function(req, res, next){
     }
   }
 
-/*  if(amdp != "") {
-    if(amdp == req.session.user.mdp) {
-      varinfomdp = "Le mot de passe est identique.";
+  if(amdp != "")
+  {
+    if(amdp !== req.session.user.mdp) {
+      varinfomdp = "Veuillez saisir le bon mot de passe."
     } else {
-      if(nmdp != cmdp) {
-        varinfomdp = "Veuillez saisir les mêmes mots de passe."
+      if(nmdp == amdp) {
+        varinfomdp = "Le mot de passe est identique."
       } else {
-        varinfomdp = "Le mot de passe a bien été changé.";
-      }
+        if(nmdp == cmdp) {
+          varinfomdp = "Le mot de passe a bien été changé."
+            const app = async () => {
+            let result = await userDao.update_mdp(cmdp, req.session.user.id_membre);
+          }
+          app();
+        } else {
+          varinfomdp = "La confirmation du nouveau mot de passe est différente."
+        }
+      } 
     }
-  }*/
-
+  }
+  
   res.render('profil', { title: 'AskThem', rubrique: 'Profil', infomail: varinfomail, infomdp: varinfomdp});
 });
 
